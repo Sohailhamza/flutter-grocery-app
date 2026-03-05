@@ -10,11 +10,11 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // 1. Background Image (Figma ke mutabiq full screen)
+        // 1. Background Image 
         Positioned.fill(
           child: Image.asset(
             model.image,
-            fit: BoxFit.cover, // Ye image ko poori screen pe phela dega
+            fit: BoxFit.cover, // image to full screen
           ),
         ),
 
