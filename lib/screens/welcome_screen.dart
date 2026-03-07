@@ -18,27 +18,31 @@ class WelcomeScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
 
-          // Top bar: back arrow + "Welcome" title
+          // Top back arrow
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back, color: Colors.white),
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(Icons.arrow_back, color: Colors.white),
+              ),
+            ),
+          ),
+
+          // Top "Welcome" label
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: const Text(
+                  "Welcome",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
-                  const Text(
-                    "Welcome",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: 24),
-                ],
+                ),
               ),
             ),
           ),
@@ -81,12 +85,21 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {},
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.g_mobiledata, color: Colors.red, size: 26),
-                        SizedBox(width: 10),
-                        Text(
+                        Image.network(
+                          "https://www.google.com/favicon.ico",
+                          height: 20,
+                          width: 20,
+                          errorBuilder: (_, __, ___) => const Icon(
+                            Icons.g_mobiledata,
+                            color: Colors.red,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        const Text(
                           "Continue with google",
                           style: TextStyle(
                             color: Colors.black87,
@@ -113,13 +126,13 @@ class WelcomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignupScreen(),
+                          builder: (context) => SignupScreen(),
                         ),
                       );
                     },
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Icon(Icons.person_outline, color: Colors.white, size: 20),
                         SizedBox(width: 8),
                         Text(
@@ -148,7 +161,7 @@ class WelcomeScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
+                              builder: (context) => LoginScreen(),
                             ),
                           );
                         },
