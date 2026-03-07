@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/signup_screen.dart';
+import 'package:grocery_app/screens/login_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
           Stack(
             children: [
               Image.asset(
-                "assets/images/login.png",
+                "assets/images/signup.png",
                 height: 300,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Welcome back !",
+                    "Create account",
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   const Text(
-                    "Sign in to your account",
+                    "Quickly create account",
                     style: TextStyle(color: Colors.grey, fontSize: 13),
                   ),
                   const SizedBox(height: 24),
@@ -70,9 +70,33 @@ class LoginScreen extends StatelessWidget {
                   TextField(
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: "Email Address",
+                      hintText: "Email address",
                       hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
                       prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey, size: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Color(0xFF7CC344)),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Phone number field
+                  TextField(
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      hintText: "Phone number",
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                      prefixIcon: const Icon(Icons.phone_outlined, color: Colors.grey, size: 20),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
@@ -113,49 +137,9 @@ class LoginScreen extends StatelessWidget {
                       contentPadding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                   ),
-                  const SizedBox(height: 14),
-
-                  // Remember me + Forgot password row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: Checkbox(
-                              value: false,
-                              onChanged: (_) {},
-                              activeColor: const Color(0xFF7CC344),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text(
-                            "Remember me",
-                            style: TextStyle(color: Colors.grey, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          "Forgot password",
-                          style: TextStyle(
-                            color: Color(0xFF7CC344),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   const SizedBox(height: 24),
 
-                  // Login button
+                  // Signup button
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF7CC344),
@@ -167,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     onPressed: () {},
                     child: const Text(
-                      "Login",
+                      "Signup",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
@@ -177,25 +161,25 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // Sign up link
+                  // Login link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have an account ? ",
+                        "Already have an account ? ",
                         style: TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
+                              builder: (context) => const LoginScreen(),
                             ),
                           );
                         },
                         child: const Text(
-                          "Sign up",
+                          "Login",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,

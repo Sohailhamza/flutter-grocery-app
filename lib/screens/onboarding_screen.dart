@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/welcome_screen.dart';
 import '../models/onboarding_model.dart';
 import '../widgets/onboarding_page.dart';
+
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -17,22 +19,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingModel(
       image: "assets/images/splash1.png",
       title: "Welcome to Big Cart",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
+      desc:
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
     ),
     OnboardingModel(
       image: "assets/images/splash2.png",
       title: "Buy Quality Dairy Products",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
+      desc:
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
     ),
     OnboardingModel(
       image: "assets/images/splash3.png",
       title: "Buy Premium Quality Fruits",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
+      desc:
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
     ),
     OnboardingModel(
       image: "assets/images/splash4.png",
       title: "Get Discounts On All Products",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
+      desc:
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
     ),
   ];
 
@@ -84,11 +90,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: GestureDetector(
               onTap: () {
                 if (currentIndex == data.length - 1) {
-                  // Navigate to Home
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen(),
+                    ),
+                  );
                 } else {
                   _controller.nextPage(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeInOut);
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn,
+                  );
                 }
               },
               child: Container(
@@ -112,7 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
