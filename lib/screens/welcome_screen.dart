@@ -9,6 +9,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+
         children: [
           // Full screen background image
           Image.asset(
@@ -16,6 +17,7 @@ class WelcomeScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             fit: BoxFit.cover,
+            
           ),
 
           // Top back arrow
@@ -92,7 +94,7 @@ class WelcomeScreen extends StatelessWidget {
                           "https://www.google.com/favicon.ico",
                           height: 20,
                           width: 20,
-                          errorBuilder: (_, __, ___) => const Icon(
+                          errorBuilder: (_, _, _) => const Icon(
                             Icons.g_mobiledata,
                             color: Colors.red,
                             size: 24,
