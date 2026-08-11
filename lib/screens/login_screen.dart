@@ -44,7 +44,6 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
           ),
-
           
           // ✅ Bottom white card — same as Welcome & Signup
           Align(
