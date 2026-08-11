@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/product_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'unit': '2.0 lbs',
       'price': '\$7.00',
       'color': Color(0xFFF0F7E6),
-      'image': 'assets/images/avacoda.png',
+      'image': 'assets/images/avocado.png',
       'badge': 'NEW',
       'liked': false,
       'inCart': true,
@@ -358,14 +359,22 @@ class _HomeScreenState extends State<HomeScreen> {
     final bool liked = product['liked'] as bool;
     final String? badge = product['badge'] as String?;
 
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailScreen(product: product),
+          ),
+        );
+      },
+      child: Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: const Color(0xFFF0F0F0)),
         boxShadow: [
           BoxShadow(
-            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
@@ -486,7 +495,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-    );
+    ), // Container
+    ); // GestureDetector
   }
 
   Widget _buildAddToCartButton(int index) {
