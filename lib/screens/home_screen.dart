@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/cart_screen.dart';
 import 'package:grocery_app/screens/product_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -133,12 +134,23 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: _buildBottomNav(),
 
       // Floating Cart Button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFF7CC344),
-        shape: const CircleBorder(),
-        child: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 26),
+     // Inside HomeScreen floatingActionButton:
+floatingActionButton: FloatingActionButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CartScreen(
+          // Optional: Pass products currently flagged with inCart: true
+          initialCartItems: _products.where((p) => p['inCart'] == true).toList(),
+        ),
       ),
+    );
+  },
+  backgroundColor: const Color(0xFF7CC344),
+  shape: const CircleBorder(),
+  child: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 26),
+),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
@@ -577,6 +589,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
+  
 
   // ─── Bottom Nav ───────────────────────────────────────────────
   Widget _buildBottomNav() {
