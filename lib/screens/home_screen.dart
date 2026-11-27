@@ -10,6 +10,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+  
+  
   int _currentBanner = 0;
   int _bottomNavIndex = 0;
 
@@ -39,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
       'unit': '2.0 lbs',
       'price': '\$7.00',
       'color': Color(0xFFF0F7E6),
-      'image': 'assets/images/avocado.png',
+      'image': 'assets/images/avacoda.png',
       'badge': 'NEW',
       'liked': false,
       'inCart': true,
-      'qty': 1,
+      'qty': 0,
     },
     {
       'name': 'Pineapple',
@@ -76,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'badge': 'NEW',
       'liked': false,
       'inCart': true,
-      'qty': 1,
+      'qty': 0,
     },
     {
       'name': 'Fresh Broccoli',
@@ -99,7 +108,21 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             // Search Bar
-            _buildSearchBar(),
+            // To this:
+            // Functional Search Bar with Controller Linked
+            _buildSearchBar(
+              controller: _searchController,
+              onChanged: (text) {
+                print("Typing: $text");
+              },
+              onSubmitted: (query) {
+                print("Search submitted: $query");
+              },
+              onFilterPressed: () {
+                print("Filter clicked");
+              },
+            ),
+
 
             // Scrollable content
             Expanded(
@@ -155,8 +178,13 @@ floatingActionButton: FloatingActionButton(
     );
   }
 
-  // ─── Search Bar ───────────────────────────────────────────────
-  Widget _buildSearchBar() {
+  // ─── Search Bar Widget ─────────────────────────────────────────
+  Widget _buildSearchBar({
+    required TextEditingController controller,
+    Function(String)? onChanged,
+    Function(String)? onSubmitted,
+    VoidCallback? onFilterPressed,
+  }) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 6),
       child: Container(
@@ -171,16 +199,26 @@ floatingActionButton: FloatingActionButton(
             const SizedBox(width: 14),
             const Icon(Icons.search, color: Colors.grey, size: 22),
             const SizedBox(width: 10),
-            const Expanded(
-              child: Text(
-                'Search keywords..',
-                style: TextStyle(color: Colors.grey, fontSize: 14),
+            Expanded(
+              child: TextField(
+                controller: controller,
+                onChanged: onChanged,
+                onSubmitted: onSubmitted,
+                style: const TextStyle(color: Colors.black, fontSize: 14),
+                decoration: const InputDecoration.collapsed(
+                  hintText: 'Search keywords..',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              padding: const EdgeInsets.all(6),
-              child: const Icon(Icons.tune, color: Colors.grey, size: 22),
+            InkWell(
+              onTap: onFilterPressed,
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.all(6),
+                child: const Icon(Icons.tune, color: Colors.grey, size: 22),
+              ),
             ),
           ],
         ),
@@ -221,7 +259,7 @@ floatingActionButton: FloatingActionButton(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: const [
                                     Text(
-                                      '20% off on your\nfirst purchase',
+                                      '20% off on youqr\nfirst purchase',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
